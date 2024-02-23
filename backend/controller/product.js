@@ -45,4 +45,21 @@ const getAll = async (req, res) => {
     });
   }
 };
-export default { createProduct, getAll };
+const getProductByID = async (req, res) => {
+  const id = req.params.id;
+  const product = await productDAO.getProductByID(id);
+  try {
+    if (!product) {
+      res.status(404).json({
+        message: "not found",
+      });
+    } else {
+      res.status(200).json(product);
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.toString(),
+    });
+  }
+};
+export default { createProduct, getAll, getProductByID };

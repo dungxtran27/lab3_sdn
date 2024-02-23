@@ -22,12 +22,24 @@ const createProduct = async ({
 const getAll = async () => {
   try {
     const products = await Product.find()
+      .populate("categories")
       .populate("images", "url caption")
-      // .populate("categories")
       .exec();
     return products;
   } catch (error) {
     throw new Error(error.toString());
   }
 };
-export default { createProduct, getAll };
+const getProductByID = async (id) => {
+  try {
+    const products = await Product.findById(id)
+      .populate("categories")
+      .populate("images", "url caption")
+      .exec();
+    return products;
+  } catch (error) {
+    throw new Error(error.toString());
+  }
+};
+
+export default { createProduct, getAll, getProductByID };
