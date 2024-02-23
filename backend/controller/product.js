@@ -29,4 +29,20 @@ const createProduct = async (req, res) => {
     });
   }
 };
-export default { createProduct };
+const getAll = async (req, res) => {
+  const listProduct = await productDAO.getAll();
+  try {
+    if (listProduct.length > 0) {
+      res.status(200).json(listProduct);
+    } else {
+      res.status(404).json({
+        message: "not found",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.toString(),
+    });
+  }
+};
+export default { createProduct, getAll };

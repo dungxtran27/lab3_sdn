@@ -10,16 +10,20 @@ const productSchema = new Schema(
       type: String,
       required: [true, "description required"],
     },
-    images: {
-      type: Schema.Types.ObjectId,
-      ref: "images",
-      require: false,
-    },
-    comments: {
-      type: Schema.Types.ObjectId,
-      ref: "comments",
-      require: true,
-    },
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "images",
+        require: false,
+      },
+    ],
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "comments",
+        require: true,
+      },
+    ],
     category: {
       type: Schema.Types.ObjectId,
       ref: "categories",

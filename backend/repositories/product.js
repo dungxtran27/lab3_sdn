@@ -19,4 +19,15 @@ const createProduct = async ({
     throw new Error(error.toString());
   }
 };
-export default { createProduct };
+const getAll = async () => {
+  try {
+    const products = await Product.find()
+      .populate("images", "url caption")
+      // .populate("categories")
+      .exec();
+    return products;
+  } catch (error) {
+    throw new Error(error.toString());
+  }
+};
+export default { createProduct, getAll };
