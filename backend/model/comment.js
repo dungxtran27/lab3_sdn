@@ -18,6 +18,6 @@ const commentSchema = new Schema(
   { timestamps: true }
 );
 
-const Category = mongoose.model("categories", categorySchema);
+const Category = mongoose.model("comments", categorySchema);
 export default Category;
 export { commentSchema };
