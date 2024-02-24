@@ -16,7 +16,6 @@ const createProduct = async (req, res) => {
         })
       )
     ).flat();
-    console.log(imageIDs);
     const newProduct = await productDAO.createProduct({
       name,
       price,

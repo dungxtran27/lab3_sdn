@@ -22,7 +22,7 @@ const createProduct = async ({
 const getAll = async () => {
   try {
     const products = await Product.find()
-      .populate("categories")
+      .populate("category")
       .populate("images", "url caption")
       .exec();
     return products;
@@ -33,7 +33,7 @@ const getAll = async () => {
 const getProductByID = async (id) => {
   try {
     const products = await Product.findById(id)
-      .populate("categories")
+      .populate("category")
       .populate("images", "url caption")
       .exec();
     return products;

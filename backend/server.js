@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import connectDB from "./database.js";
-import { productRouter } from "./routes/index.js";
+import { categoryRouter, productRouter } from "./routes/index.js";
 
 const app = express();
 
@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/product/", productRouter);
+app.use("/category/", categoryRouter);
 
 const Port = process.env.PORT;
 

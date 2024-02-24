@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Carousel,
@@ -13,6 +13,14 @@ import { useParams } from "react-router-dom";
 const Detail = () => {
   const { pid } = useParams();
   const [product, setProduct] = useState({});
+  useEffect(() => {
+    fetch(`http://localhost:9999/product/${pid}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+      });
+  }, []);
+  console.log(product);
   return (
     <Container>
       <Row className="text-left">
@@ -22,7 +30,7 @@ const Detail = () => {
         <Col xs={6}>
           <Row>
             <img
-              src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
+              src={product.images[0].url}
               className="img-fluid"
               alt="Big Image"
             />
@@ -31,14 +39,14 @@ const Detail = () => {
             <Col xs={4}>
               <img
                 className="d-block w-100"
-                src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
+                src={product.images[0].url}
                 alt="First slide"
               />
             </Col>
             <Col xs={4}>
               <img
                 className="d-block w-100"
-                src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
+                src={product.images[0].url}
                 alt="First slide"
               />
             </Col>
@@ -53,12 +61,12 @@ const Detail = () => {
         </Col>
 
         <Col xs={6}>
-          <Row>Name:</Row>
-          <Row>Price:</Row>
+          <Row>Name: {product.name}</Row>
+          <Row>Price: {product.price}</Row>
         </Col>
       </Row>
       <Row>
-        <Row>Description</Row>
+        <Row>Description: {product.description}</Row>
       </Row>
       <Row>
         <Row> Comments</Row>

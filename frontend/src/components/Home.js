@@ -8,10 +8,9 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-        // console.log(data);
+        console.log(data);
       });
   }, []);
-  console.log(products);
   return (
     <Row>
       <Col xs={12}>
@@ -39,15 +38,15 @@ const Home = () => {
               </thead>
 
               <tbody>
-                {/* {products.map((p) => (
-                  <tr>
+                {products.map((p) => (
+                  <tr key={p._id}>
                     <td>
                       <Link to={"/detail/" + p._id}> {p.name}</Link>
                     </td>
                     <td>{p.description}</td>
-                    <td>{p.categories.name}</td>
+                    <td>{p.category.name}</td>
                   </tr>
-                ))} */}
+                ))}
               </tbody>
             </Table>
           </Col>

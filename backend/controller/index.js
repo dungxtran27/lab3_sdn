@@ -1,2 +1,3 @@
 import productController from "./product.js";
-export { productController };
+import categoryController from "./category.js";
+export { productController, categoryController };

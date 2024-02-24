@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 const AddProduct = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
     description: "",
-    categories: "",
+    category: "",
     images: [],
   });
-
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:9999/category")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategory(data);
+      });
+  }, []);
   const handleChange = (e) => {
     if (e.target.name === "image") {
       const filesArray = Array.from(e.target.files);
@@ -42,7 +49,6 @@ const AddProduct = () => {
       });
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -56,11 +62,13 @@ const AddProduct = () => {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
+      alert("ok roi do");
     } catch (error) {
       console.log(" deo on roi");
-      console.log(error.toString());
+      alert("deo on roi");
     }
   };
+  console.log(formData);
 
   return (
     <Container>
@@ -98,17 +106,19 @@ const AddProduct = () => {
               />
             </Form.Group>
 
-            <Form.Group controlId="categories">
+            <Form.Group controlId="category">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 as="select"
-                name="categories"
+                name="category"
+                value="65d882d73e7e5d5fd66872e3"
                 onChange={handleChange}
               >
-                <option value="electronics">Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="books">Books</option>
-                <option value="home">Home & Kitchen</option>
+                {category.map((c) => (
+                  <option key={c._id} value={c._id}>
+                    {c.name}
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
 
