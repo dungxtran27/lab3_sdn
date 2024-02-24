@@ -2,6 +2,7 @@ import Product from "../model/product.js";
 import { productDAO, imageDAO } from "../repositories/index.js";
 
 const createProduct = async (req, res) => {
+  // console.log(req.body);
   const { name, price, description, category } = req.body;
   try {
     const imageIDs = (
@@ -15,6 +16,7 @@ const createProduct = async (req, res) => {
         })
       )
     ).flat();
+    console.log(imageIDs);
     const newProduct = await productDAO.createProduct({
       name,
       price,
@@ -24,6 +26,7 @@ const createProduct = async (req, res) => {
     });
     res.status(200).json(newProduct);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({
       error: error.toString(),
     });

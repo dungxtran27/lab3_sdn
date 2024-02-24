@@ -4,14 +4,13 @@ const imageSchema = new Schema(
     url: {
       type: String,
       required: [true, "url required "],
-      unique: false,
     },
     caption: {
       type: String,
       required: [true, "captioon required"],
     },
     size: {
-      type: Number,
+      type: String,
       required: [true, "size required"],
     },
   },
