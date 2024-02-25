@@ -7,7 +7,7 @@ const createImage = async ({ url, caption, size }) => {
       caption,
       size,
     });
-    return newImage._id.toString();
+    return newImage;
   } catch (error) {
     throw new Error(error.toString());
   }

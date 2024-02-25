@@ -38,9 +38,9 @@ const Detail = () => {
           <Row>
             <img
               src={
-                // product.images.length > 0  ? product.images[0].url
-                //   :
-                "https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
+                images.length > 0
+                  ? images[0].url
+                  : "https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
               }
               className="img-fluid"
               alt="Big Image"

@@ -69,7 +69,6 @@ const AddProduct = () => {
     }
   };
   // console.log(formData);
-  console.log(category);
   // console.log(category[0]._id);
   const defaultValueCate = category.length > 0 ? category[0]._id : 6;
   return (

@@ -3,7 +3,11 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import connectDB from "./database.js";
-import { categoryRouter, productRouter } from "./routes/index.js";
+import {
+  categoryRouter,
+  commentRouter,
+  productRouter,
+} from "./routes/index.js";
 
 const app = express();
 
@@ -30,6 +34,7 @@ app.get("/", (req, res) => {
 
 app.use("/product/", productRouter);
 app.use("/category/", categoryRouter);
+app.use("/comment/", commentRouter);
 
 const Port = process.env.PORT;
 

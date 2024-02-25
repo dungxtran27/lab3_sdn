@@ -24,6 +24,7 @@ const createProduct = async (req, res) => {
       images: imageIDs,
     });
     res.status(200).json(newProduct);
+    console.log(newProduct);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({
@@ -64,4 +65,5 @@ const getProductByID = async (req, res) => {
     });
   }
 };
+
 export default { createProduct, getAll, getProductByID };

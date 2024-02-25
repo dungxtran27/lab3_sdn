@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import Category from "./category.js";
 import { commentSchema } from "./comment.js";
+import { imageSchema } from "./image.js";
 const productSchema = new Schema(
   {
     name: {
@@ -15,13 +16,7 @@ const productSchema = new Schema(
       type: Number,
       required: [true, "price required"],
     },
-    images: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "images",
-        require: false,
-      },
-    ],
+    images: [imageSchema],
     comments: [commentSchema],
     category: {
       type: Schema.Types.ObjectId,

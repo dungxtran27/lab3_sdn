@@ -1,14 +1,6 @@
 import Comment from "../model/comment.js";
-import Product from "../model/product.js";
 // create image
-const getAllCommentByProductID = async (id) => {
-  try {
-    const cate = await Comment.find().exec();
-    return cate;
-  } catch (error) {
-    throw new Error(error.toString());
-  }
-};
+
 const createComment = async (content) => {
   try {
     const newComment = await Comment.create({
@@ -22,5 +14,5 @@ const createComment = async (content) => {
     throw new Error(error.toString());
   }
 };
-export default { getAllCommentByProductID, createComment };
+export default { createComment };
 //

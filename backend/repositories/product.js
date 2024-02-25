@@ -23,7 +23,7 @@ const getAll = async () => {
   try {
     const products = await Product.find()
       .populate("category")
-      .populate("images", "url caption")
+
       .exec();
     return products;
   } catch (error) {
@@ -41,5 +41,18 @@ const getProductByID = async (id) => {
     throw new Error(error.toString());
   }
 };
-
-export default { createProduct, getAll, getProductByID };
+const addCommentToProduct = async (pid, comment) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      pid,
+      {
+        $push: comment,
+      },
+      { new: true }
+    );
+    return updatedProduct;
+  } catch (error) {
+    throw new Error(error.toString());
+  }
+};
+export default { createProduct, getAll, getProductByID, addCommentToProduct };
