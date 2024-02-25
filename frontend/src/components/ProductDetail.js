@@ -13,13 +13,20 @@ import { useParams } from "react-router-dom";
 const Detail = () => {
   const { pid } = useParams();
   const [product, setProduct] = useState({});
+  const [images, setIMG] = useState([]);
+
   useEffect(() => {
     fetch(`http://localhost:9999/product/${pid}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
+        setIMG(data.images);
       });
   }, []);
+
+  // if (product.images.length > 0) {
+  // setIMG(product.images);
+  console.log(images);
   console.log(product);
   return (
     <Container>
@@ -30,33 +37,26 @@ const Detail = () => {
         <Col xs={6}>
           <Row>
             <img
-              src={product.images[0].url}
+              src={
+                // product.images.length > 0  ? product.images[0].url
+                //   :
+                "https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
+              }
               className="img-fluid"
               alt="Big Image"
             />
           </Row>
           <Row className="mt-3 border-top ">
-            <Col xs={4}>
-              <img
-                className="d-block w-100"
-                src={product.images[0].url}
-                alt="First slide"
-              />
-            </Col>
-            <Col xs={4}>
-              <img
-                className="d-block w-100"
-                src={product.images[0].url}
-                alt="First slide"
-              />
-            </Col>
-            <Col xs={4}>
-              <img
-                className="d-block w-100"
-                src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
-                alt="First slide"
-              />
-            </Col>
+            {images.map((img) => (
+              <Col xs={4} key={img._id}>
+                <img
+                  className="d-block w-100"
+                  src={img.url}
+                  // src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-15-Pro-Max/Blue-Titanium/Apple-iPhone-15-Pro-Max-Blue-Titanium-thumbnail.png"
+                  alt="First slide"
+                />
+              </Col>
+            ))}
           </Row>
         </Col>
 

@@ -4,11 +4,11 @@ const commentSchema = new Schema(
     text: {
       type: String,
       required: [true, "text required "],
-      unique: [true, "must be unique: text"],
+      unique: [false],
     },
     rate: {
       type: Number,
-      required: [false, "rate required"],
+      required: [false],
     },
     author: {
       type: String,
@@ -18,6 +18,6 @@ const commentSchema = new Schema(
   { timestamps: true }
 );
 
-const Category = mongoose.model("categories", categorySchema);
-export default Category;
+const Comment = mongoose.model("comments", commentSchema);
+export default Comment;
 export { commentSchema };

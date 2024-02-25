@@ -68,8 +68,10 @@ const AddProduct = () => {
       alert("deo on roi");
     }
   };
-  console.log(formData);
-
+  // console.log(formData);
+  console.log(category);
+  // console.log(category[0]._id);
+  const defaultValueCate = category.length > 0 ? category[0]._id : 6;
   return (
     <Container>
       <Row className="justify-content-md-center pt-200">
@@ -111,7 +113,7 @@ const AddProduct = () => {
               <Form.Control
                 as="select"
                 name="category"
-                value="65d882d73e7e5d5fd66872e3"
+                value={defaultValueCate}
                 onChange={handleChange}
               >
                 {category.map((c) => (
