@@ -15,6 +15,8 @@ const Detail = () => {
   const [product, setProduct] = useState({});
   const [images, setIMG] = useState([]);
   const [comment, setComment] = useState([]);
+  const [content, setContent] = useState("");
+  const [refresh, setRefresh] = useState(1);
 
   useEffect(() => {
     fetch(`http://localhost:9999/product/${pid}`)
@@ -24,12 +26,38 @@ const Detail = () => {
         setIMG(data.images);
         setComment(data.comments);
       });
-  }, []);
+  }, [refresh]);
 
   // if (product.images.length > 0) {
   // setIMG(product.images);
   // console.log(images);
   // console.log(product);
+  const postData = async (e) => {
+    e.preventDefault();
+    const url = "http://localhost:9999/comment"; // Update the URL with your API endpoint
+
+    const data = {
+      content: content,
+      pid: pid,
+    };
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      refresh == 1 ? setRefresh(2) : setRefresh(1);
+      setContent("");
+    } catch (error) {
+      alert(error.toString());
+    }
+  };
+
   return (
     <Container>
       <Row className="text-left">
@@ -72,20 +100,23 @@ const Detail = () => {
       </Row>
 
       <Row> Comments:</Row>
-      <Row>
-        {comment.map((cmt) => (
-          <Row key={cmt._id}>
-            <p>{cmt.author} :</p>
-            <p>{cmt.text}</p>
-          </Row>
-        ))}
-      </Row>
+
+      {comment.map((cmt) => (
+        <Row key={cmt._id}>
+          <Row>{cmt.author} :</Row>
+          <Row className="content">{cmt.text}</Row>
+        </Row>
+      ))}
 
       <Row>
         <Row>
-          <Form className="d-flex">
-            <FormControl type="text" placeholder="Enter your text..." />
-            <Button>Submit</Button>
+          <Form className="d-flex" onSubmit={postData}>
+            <FormControl
+              type="text"
+              placeholder="Enter your text..."
+              onChange={(e) => setContent(e.target.value)}
+            />
+            <Button type="submit">send</Button>
           </Form>
         </Row>
       </Row>
