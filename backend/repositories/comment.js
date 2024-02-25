@@ -8,7 +8,6 @@ const createComment = async (content) => {
       rate: 0, // You can set the rate as needed
       author: "Example Author",
     });
-
     return newComment;
   } catch (error) {
     throw new Error(error.toString());

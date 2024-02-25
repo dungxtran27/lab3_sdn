@@ -14,6 +14,7 @@ const Detail = () => {
   const { pid } = useParams();
   const [product, setProduct] = useState({});
   const [images, setIMG] = useState([]);
+  const [comment, setComment] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:9999/product/${pid}`)
@@ -21,13 +22,14 @@ const Detail = () => {
       .then((data) => {
         setProduct(data);
         setIMG(data.images);
+        setComment(data.comments);
       });
   }, []);
 
   // if (product.images.length > 0) {
   // setIMG(product.images);
-  console.log(images);
-  console.log(product);
+  // console.log(images);
+  // console.log(product);
   return (
     <Container>
       <Row className="text-left">
@@ -68,9 +70,17 @@ const Detail = () => {
       <Row>
         <Row>Description: {product.description}</Row>
       </Row>
+
+      <Row> Comments:</Row>
       <Row>
-        <Row> Comments</Row>
+        {comment.map((cmt) => (
+          <Row key={cmt._id}>
+            <p>{cmt.author} :</p>
+            <p>{cmt.text}</p>
+          </Row>
+        ))}
       </Row>
+
       <Row>
         <Row>
           <Form className="d-flex">

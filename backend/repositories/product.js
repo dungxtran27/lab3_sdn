@@ -46,10 +46,11 @@ const addCommentToProduct = async (pid, comment) => {
     const updatedProduct = await Product.findByIdAndUpdate(
       pid,
       {
-        $push: comment,
+        $push: { comments: comment },
       },
       { new: true }
     );
+    console.log(updatedProduct);
     return updatedProduct;
   } catch (error) {
     throw new Error(error.toString());
